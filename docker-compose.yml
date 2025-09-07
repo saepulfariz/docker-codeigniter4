@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: ci4_app
+    volumes:
+      - .:/var/www/html
+    networks:
+      - ci4net
+
+  webserver:
+    image: nginx:stable
+    container_name: ci4_nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+    networks:
+      - ci4net
+
+networks:
+  ci4net:
+    driver: bridge
