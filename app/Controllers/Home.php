@@ -13,4 +13,9 @@ class Home extends BaseController
     {
         echo getenv('APP_NAME');
     }
+   
+    public function students()
+    {
+	return $this->response->setJSON(db_connect()->table('students')->get()->getResultArray());
+    }
 }
