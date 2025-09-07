@@ -8,6 +8,8 @@ services:
       - .:/var/www/html
     networks:
       - ci4net
+    env_file:
+      - .env  # Ini akan memasukkan semua variabel dari file .env
 
   webserver:
     image: nginx:stable
